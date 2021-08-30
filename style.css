@@ -12,7 +12,7 @@ body
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #154367;
+  background-color: #086972;
   overflow: hidden;
 }
 .comment 
@@ -50,13 +50,13 @@ body
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: #ff4081;
+  background-color: #fbfd8a;
   transition: 0.5s;
   cursor: pointer;
 }
 .dragNavigation .toggle.active
 {
-  background-color: #2196f3;
+  background-color: #01a9b4;
 }
 .dragNavigation .toggle::before
 {
@@ -69,7 +69,7 @@ body
   justify-content: center;
   align-items: center;
   font-weight: 400;
-  color: #fff;
+  color: #222;
   transition: 0.5s;
 }
 .dragNavigation .toggle.active::before
@@ -90,7 +90,7 @@ body
 }
 .dragNavigation ul li:hover
 {
-  background-color: #03a9f4;
+  background-color: #01a9b4;
 }
 .dragNavigation ul li a 
 {
@@ -100,11 +100,11 @@ body
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #154367;
+  color: #086972;
 }
 .dragNavigation ul li a .icon
 {
-  fill: #154367;
+  fill: #086972;
   position: relative;
   display: block;
   min-width: 50px;

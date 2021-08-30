@@ -65,7 +65,7 @@ function isTouchDevice(){
 }
 
 if(isTouchDevice()===true) {
-  //alert('Touch Device'); 
+  //alert('Сенсорный девайс'); 
 
         /* ---------------------------------- Остановка и возобновление прокрутки для тач-экранов---------------------------------- */
         
@@ -83,7 +83,7 @@ if(isTouchDevice()===true) {
           window.onscroll = function() {};
         }   
         
-        /* ------------------------------------------- Реализация двойного тапа для тач-скрина (работает не очень корректно)------------------------------- */
+        /* ------------------------------------------- Реализация двойного тапа для тач-скрина и переменные для длинного тапа ------------------------------- */
         
         let clickTimer = null;
 
@@ -103,7 +103,7 @@ if(isTouchDevice()===true) {
         
         let longtouch;
         let timer;
-        let touchduration = 1000;
+        let touchduration = 4000;
 
         /* ---------------------------------------------- События для тач-скрина --------------------------------------- */
         
@@ -112,21 +112,26 @@ if(isTouchDevice()===true) {
           let dragElement = event.touches[0].target.closest('.draggable');
           if (!dragElement) return;
           
+          let colorToggle = window.getComputedStyle( document.querySelector('.toggle'), null).getPropertyValue("background-color"); // Цвет элемента с классом toggle
+
           dragElement.ondragstart = function() {
               return false;
           };
+          
           disableScroll(); // Выключаем прокрутку страницы
-
-          longtouch = false;
 
           /*----------------Реализация длинного тапа --------------- */
           
+          longtouch = false;
           timer = setTimeout(function() {
             longtouch = true;
+            document.querySelector('.toggle').style.backgroundColor = 'rgb(135, 223, 214)';
             timer = null
           }, touchduration);
 
-          /*if (dblTap()) {                                                       // функция выполняется при двойном тапе на объект
+          /* -------------------------Реализация двойного тапа----------------------*/
+
+          /*if (dblTap()) {
               document.querySelector('.toggle').classList.toggle('active');
               document.querySelector('.dragNavigation').classList.toggle('active');
           };*/
@@ -143,6 +148,7 @@ if(isTouchDevice()===true) {
             if (longtouch) {
                 document.querySelector('.toggle').classList.toggle('active');
                 document.querySelector('.dragNavigation').classList.toggle('active');
+                document.querySelector('.toggle').style.backgroundColor = colorToggle=='rgb(251, 253, 138)' ? 'rgb(1, 169, 180)' : 'rgb(251, 253, 138)';
                 longtouch = false;
             }
             
