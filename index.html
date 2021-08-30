@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <span class="comment ">Drag & dblClick</span>
+  <span class="comment "></span>
   <div class="dragNavigation draggable">
     <div class="toggle"></div>
     <ul>
@@ -142,11 +142,20 @@
   </div>
   <script src="./drag.js"></script>
   <script>
-    const navigation = document.querySelector('.dragNavigation');
+    const navigation = document.querySelector('.dragNavigation'),
+          comment = document.querySelector('.comment');
     document.querySelector('.toggle').addEventListener('dblclick', (el) => {
       el.target.classList.toggle('active');
       navigation.classList.toggle('active');
     });
+    function isTouchDevice(){
+      return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+    };
+    if(isTouchDevice()===true) {
+      comment.textContent='Drag & longTap';
+    } else {
+      comment.textContent='Drag & dblClick';
+    };
   </script>
 </body>
 </html>

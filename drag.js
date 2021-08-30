@@ -83,7 +83,7 @@ if(isTouchDevice()===true) {
           window.onscroll = function() {};
         }   
         
-        /* ------------------------------------------- Реализация двойного тапа для тач-скрина------------------------------- */
+        /* ------------------------------------------- Реализация двойного тапа для тач-скрина (работает не очень корректно)------------------------------- */
         
         let clickTimer = null;
 
@@ -100,6 +100,10 @@ if(isTouchDevice()===true) {
                 return true;
             }
         }
+        
+        let longtouch;
+        let timer;
+        let touchduration = 1000;
 
         /* ---------------------------------------------- События для тач-скрина --------------------------------------- */
         
@@ -113,15 +117,35 @@ if(isTouchDevice()===true) {
           };
           disableScroll(); // Выключаем прокрутку страницы
 
-          if (dblTap()) {                                                       // функция выполняется при двойном тапе на объект
+          longtouch = false;
+
+          /*----------------Реализация длинного тапа --------------- */
+          
+          timer = setTimeout(function() {
+            longtouch = true;
+            timer = null
+          }, touchduration);
+
+          /*if (dblTap()) {                                                       // функция выполняется при двойном тапе на объект
               document.querySelector('.toggle').classList.toggle('active');
               document.querySelector('.dragNavigation').classList.toggle('active');
-          };
+          };*/
 
           startTouchDrag(dragElement, event.touches[0].clientX, event.touches[0].clientY);
 
           function onTouchUp(event) {
             enableScroll(); // Включаем прокрутку страницы
+            
+            /* ------ Действия при долгом тапе-------------------- */
+            if (timer) {
+              clearTimeout(timer);
+            }
+            if (longtouch) {
+                document.querySelector('.toggle').classList.toggle('active');
+                document.querySelector('.dragNavigation').classList.toggle('active');
+                longtouch = false;
+            }
+            
             finishTouchDrag();
           };
 
