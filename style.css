@@ -113,6 +113,10 @@ body
   text-align: center;
   line-height: 50px;
 }
+.dragNavigation ul li a .icon svg 
+{
+  height: 100%;
+}
 .dragNavigation ul li a .title
 {
   position: relative;
